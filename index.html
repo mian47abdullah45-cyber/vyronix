@@ -4,480 +4,484 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080b16">
-<title>VYRONIX — Connect Minds</title>
-
-<script src="https://unpkg.com/lucide@latest"></script>
+<meta name="theme-color" content="#080b18">
+<title>VYRONIX Social</title>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
-
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#080b16;--panel:#111729;--panel2:#192239;
---text:#f7f8ff;--muted:#9aa6c2;--accent:#8b5cf6;
---cyan:#22d3ee;--line:#27314b}
-body{background:var(--bg);color:var(--text);
-font-family:Inter,Arial,sans-serif;min-height:100vh}
+:root{--bg:#080b18;--card:#11182b;--card2:#19243b;--line:#27344e;--white:#fff;--muted:#9ba9c3;--purple:#9865ff;--cyan:#27d8e8}
+body{background:var(--bg);color:var(--white);font-family:Arial,sans-serif;min-height:100vh}
 button,input,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-header{height:68px;position:sticky;top:0;z-index:10;
-background:#080b16ed;backdrop-filter:blur(18px);
-border-bottom:1px solid var(--line);display:flex;
-align-items:center;justify-content:space-between;padding:0 5%}
-.brand{font-size:24px;font-weight:900;letter-spacing:2px;
-background:linear-gradient(90deg,#a78bfa,#22d3ee);
-background-clip:text;color:transparent}
-.header-actions{display:flex;gap:12px}
-.icon-btn{border:1px solid var(--line);background:var(--panel);
-color:white;border-radius:13px;padding:11px}
-button:active{transform:scale(.96)}
-.layout{max-width:1250px;margin:auto;display:grid;
-grid-template-columns:220px minmax(0,620px) 260px;
-gap:22px;padding:25px 15px}
-.sidebar,.rightbar{position:sticky;top:90px;height:max-content}
-.nav{display:flex;align-items:center;gap:15px;width:100%;
-padding:14px;border:0;background:transparent;color:var(--muted);
-border-radius:14px;text-align:left;margin-bottom:5px;font-size:15px}
-.nav.active,.nav:hover{background:var(--panel2);color:white}
-.nav i{width:21px}
-.create-btn,.primary{background:linear-gradient(110deg,#7c3aed,#0891b2);
-color:white;border:0;border-radius:13px;padding:13px 18px;
-font-weight:800;width:100%;margin:12px 0}
-.card{background:var(--panel);border:1px solid var(--line);
-border-radius:19px;padding:17px;margin-bottom:17px}
-.section-title{font-size:19px;font-weight:800;margin-bottom:15px}
+button{cursor:pointer;color:inherit}
+header{height:65px;background:#0b1020ed;backdrop-filter:blur(15px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;z-index:20}
+.logo{font-size:24px;font-weight:900;letter-spacing:2px;background:linear-gradient(90deg,#b38aff,#29d8e8);background-clip:text;color:transparent}
+.header-right{display:flex;gap:10px}
+.ib{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:11px}
+.ib svg{width:20px}
+.app{max-width:1350px;margin:auto;display:grid;grid-template-columns:220px minmax(300px,650px) 250px;gap:22px;padding:22px 14px}
+.side{position:sticky;top:85px;height:max-content}
+.nav{width:100%;padding:14px;display:flex;gap:13px;align-items:center;border:0;border-radius:12px;background:transparent;color:var(--muted);text-align:left;margin-bottom:5px}
+.nav:hover,.nav.active{background:var(--card2);color:white}
+.nav svg{width:21px}
+.primary{width:100%;padding:14px;border:0;border-radius:13px;background:linear-gradient(110deg,#7845ed,#087eae);font-weight:bold;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:16px}
+.title{font-size:20px;font-weight:bold;margin-bottom:15px}
 .muted{color:var(--muted);font-size:13px}
-.stories{display:flex;gap:15px;overflow-x:auto;padding:5px 0 18px}
-.story{min-width:65px;text-align:center;font-size:11px;color:var(--muted)}
-.story img{width:57px;height:57px;border-radius:50%;
-object-fit:cover;padding:3px;border:2px solid var(--accent);
-margin-bottom:6px}
-.post-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.avatar{width:43px;height:43px;object-fit:cover;
-border-radius:50%;background:var(--panel2)}
-.post-user{font-weight:800;font-size:14px}
-.post-media{width:100%;max-height:650px;object-fit:contain;
-border-radius:14px;background:#050711}
-.post-text{font-size:14px;line-height:1.6;margin:12px 0}
-.post-actions{display:flex;align-items:center;gap:20px;
-border-top:1px solid var(--line);padding-top:13px}
-.action{display:flex;gap:6px;align-items:center;
-background:transparent;border:0;color:var(--muted);font-size:13px}
-.action:hover,.action.liked{color:#fb4d83}
-.action i{width:21px}
-.auth{max-width:440px;margin:55px auto;padding:25px}
-.auth h1{text-align:center;font-size:30px;margin-bottom:8px}
-.auth p{text-align:center;color:var(--muted);margin-bottom:22px}
-.field{width:100%;background:#080d1b;color:white;
-border:1px solid var(--line);border-radius:12px;
-padding:14px;margin-bottom:12px;outline:none}
-.field:focus{border-color:var(--accent)}
-.upload-box{border:1px dashed #65708c;border-radius:15px;
-padding:20px;text-align:center;margin:12px 0}
-.profile-top{text-align:center;padding:25px}
-.profile-top img{width:95px;height:95px;border-radius:50%;
-object-fit:cover;border:3px solid var(--accent)}
+.field{width:100%;padding:14px;border:1px solid var(--line);border-radius:12px;background:#090f20;color:white;margin:7px 0;outline:none}
+.field:focus{border-color:var(--purple)}
+.auth{max-width:420px;margin:55px auto;padding:20px}
+.auth .logo{text-align:center;font-size:32px;margin-bottom:10px}
+.auth p{text-align:center;color:var(--muted);margin-bottom:20px}
+.status{font-size:13px;color:var(--cyan);margin:10px 0}
+.page{display:none}
+.page.active{display:block}
+.stories{display:flex;gap:15px;overflow-x:auto;margin:8px 0 20px}
+.story{min-width:65px;text-align:center;color:var(--muted);font-size:11px}
+.story img{width:58px;height:58px;object-fit:cover;border-radius:50%;border:2px solid var(--purple);padding:2px;margin-bottom:5px}
+.post-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.avatar{width:43px;height:43px;object-fit:cover;border-radius:50%;background:var(--card2)}
+.post-user{font-weight:bold;font-size:14px}
+.post-media{width:100%;max-height:650px;object-fit:contain;background:#050710;border-radius:13px}
+.post-caption{font-size:14px;line-height:1.6;margin:12px 0}
+.actions{display:flex;gap:18px;align-items:center;border-top:1px solid var(--line);padding-top:13px;flex-wrap:wrap}
+.action{background:none;border:0;color:var(--muted);display:flex;align-items:center;gap:6px;font-size:13px}
+.action svg{width:20px}
+.action.liked{color:#ff5287}
+.profile{text-align:center;padding:25px}
+.profile img{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--purple)}
 .stats{display:flex;justify-content:center;gap:30px;margin:20px}
-.stats b{display:block;font-size:19px}
-.empty{text-align:center;padding:45px 15px;color:var(--muted)}
+.stats b{display:block;font-size:20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.grid img,.grid video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
+.empty{text-align:center;color:var(--muted);padding:35px 10px}
 .bottom{display:none}
-#status{font-size:13px;color:var(--cyan);padding:8px}
+.upload{border:1px dashed #697794;border-radius:13px;padding:20px;text-align:center;margin:10px 0}
+.tag{display:inline-block;padding:7px 12px;border-radius:20px;background:var(--card2);margin:4px;color:#c7b6ff;font-size:12px}
 @media(max-width:900px){
-.layout{grid-template-columns:1fr;max-width:650px}
-.sidebar,.rightbar{display:none}
-.bottom{position:fixed;bottom:0;left:0;right:0;
-z-index:20;display:flex;justify-content:space-around;
-background:#101729f5;border-top:1px solid var(--line);
-padding:12px 4px calc(12px + env(safe-area-inset-bottom))}
-.bottom button{border:0;background:none;color:var(--muted)}
+.app{display:block;max-width:680px;padding:14px 10px}
+.side,.right{display:none}
+.bottom{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;justify-content:space-around;background:#10182bf5;border-top:1px solid var(--line);padding:12px 4px calc(12px + env(safe-area-inset-bottom))}
+.bottom button{background:none;border:0;color:var(--muted)}
 .bottom button.active{color:var(--cyan)}
-body{padding-bottom:75px}
-header{padding:0 16px}
+body{padding-bottom:80px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="brand">VYRONIX</div>
-<div class="header-actions">
-<button class="icon-btn" onclick="showPage('search')">
-<i data-lucide="search"></i></button>
-<button class="icon-btn" onclick="showPage('notifications')">
-<i data-lucide="bell"></i></button>
-</div>
+ <div class="logo">VYRONIX</div>
+ <div class="header-right">
+  <button class="ib" onclick="openPage('search')"><i data-lucide="search"></i></button>
+  <button class="ib" onclick="openPage('notifications')"><i data-lucide="bell"></i></button>
+ </div>
 </header>
 
-<section id="authPage" class="auth">
-<div class="card">
-<h1 class="brand">VYRONIX</h1>
-<p>Connect Minds. Create the Future.</p>
-<div id="status">Connect your Firebase project to begin.</div>
-<input id="email" class="field" type="email" placeholder="Email address">
-<input id="password" class="field" type="password" placeholder="Password (6+ characters)">
-<input id="username" class="field" placeholder="Your username (for signup)">
-<button class="primary" onclick="signup()">Create Account</button>
-<button class="primary" style="background:#202d48" onclick="login()">Log In</button>
-</div>
+<section id="authScreen" class="auth">
+ <div class="card">
+  <div class="logo">VYRONIX</div>
+  <p>Connect Minds. Create the Future.</p>
+  <div id="status" class="status">Welcome to VYRONIX</div>
+  <input id="email" class="field" type="email" placeholder="Email address">
+  <input id="password" class="field" type="password" placeholder="Password (6+ characters)">
+  <input id="username" class="field" placeholder="Username (for signup)">
+  <button class="primary" onclick="signup()">CREATE ACCOUNT</button>
+  <button class="primary" style="background:#26334e" onclick="login()">LOG IN</button>
+  <p class="muted">By continuing, you agree to use VYRONIX responsibly.</p>
+ </div>
 </section>
 
-<div id="app" class="layout hidden">
+<div id="app" class="app" style="display:none">
 
-<aside class="sidebar">
-<div class="section-title">Discover</div>
-<button class="nav active" onclick="showPage('home')"><i data-lucide="house"></i> Home</button>
-<button class="nav" onclick="showPage('explore')"><i data-lucide="compass"></i> Explore</button>
-<button class="nav" onclick="showPage('search')"><i data-lucide="search"></i> Search</button>
-<button class="nav" onclick="showPage('create')"><i data-lucide="plus-square"></i> Create Post</button>
-<button class="nav" onclick="showPage('notifications')"><i data-lucide="bell"></i> Notifications</button>
-<button class="nav" onclick="showPage('profile')"><i data-lucide="user-round"></i> My Profile</button>
-<button class="nav" onclick="logout()"><i data-lucide="log-out"></i> Log Out</button>
-<button class="create-btn" onclick="showPage('create')">＋ Create</button>
+<aside class="side">
+ <div class="title">Discover</div>
+ <button class="nav active" onclick="openPage('home')"><i data-lucide="house"></i>Home</button>
+ <button class="nav" onclick="openPage('explore')"><i data-lucide="compass"></i>Explore</button>
+ <button class="nav" onclick="openPage('search')"><i data-lucide="search"></i>Search</button>
+ <button class="nav" onclick="openPage('create')"><i data-lucide="plus-square"></i>Create</button>
+ <button class="nav" onclick="openPage('messages')"><i data-lucide="message-circle"></i>Messages</button>
+ <button class="nav" onclick="openPage('live')"><i data-lucide="radio"></i>Live</button>
+ <button class="nav" onclick="openPage('sports')"><i data-lucide="trophy"></i>Sports</button>
+ <button class="nav" onclick="openPage('news')"><i data-lucide="newspaper"></i>World News</button>
+ <button class="nav" onclick="openPage('market')"><i data-lucide="shopping-bag"></i>Marketplace</button>
+ <button class="nav" onclick="openPage('notifications')"><i data-lucide="bell"></i>Notifications</button>
+ <button class="nav" onclick="openPage('profile')"><i data-lucide="user-round"></i>Profile</button>
+ <button class="nav" onclick="openPage('settings')"><i data-lucide="settings"></i>Settings</button>
+ <button class="nav" onclick="logout()"><i data-lucide="log-out"></i>Logout</button>
+ <button class="primary" onclick="openPage('create')">＋ Create Post</button>
 </aside>
 
 <main>
-<div id="homePage">
-<div class="stories">
-<div class="story"><img src="https://placehold.co/100x100/171b35/white?text=+" alt="Add story">Your story</div>
-<div class="story"><img src="https://placehold.co/100x100/432879/white?text=V" alt="V">Explore</div>
-<div class="story"><img src="https://placehold.co/100x100/164e63/white?text=Y" alt="Y">Community</div>
-</div>
-<div class="section-title">For You ✨</div>
-<div id="feed"><div class="empty">Loading your community...</div></div>
-</div>
+ <section id="home" class="page active">
+  <div class="stories">
+   <div class="story"><img src="https://placehold.co/100x100/39236d/fff?text=+" alt="">Your story</div>
+   <div class="story"><img src="https://placehold.co/100x100/164e63/fff?text=V" alt="">VYRONIX</div>
+   <div class="story"><img src="https://placehold.co/100x100/432879/fff?text=Y" alt="">Creators</div>
+  </div>
+  <div class="title">For You ✨</div>
+  <div id="feed"><div class="empty">Your feed will appear here.</div></div>
+ </section>
 
-<div id="createPage" class="hidden card">
-<div class="section-title">Create a Post</div>
-<textarea id="caption" class="field" rows="3" placeholder="What's happening in your world?"></textarea>
-<div class="upload-box">
-<i data-lucide="image-plus"></i>
-<p style="margin:10px">Choose a photo or video</p>
-<input id="mediaFile" type="file" accept="image/*,video/*">
-</div>
-<button class="primary" onclick="createPost()">Publish Post</button>
-</div>
+ <section id="create" class="page card">
+  <div class="title">Create Post</div>
+  <textarea id="caption" class="field" rows="4" placeholder="Share your thoughts with the world..."></textarea>
+  <div class="upload"><i data-lucide="image-plus"></i><p>Choose image or video</p>
+   <input id="media" type="file" accept="image/*,video/*">
+  </div>
+  <button class="primary" onclick="publish()">PUBLISH POST</button>
+ </section>
 
-<div id="profilePage" class="hidden">
-<div class="card profile-top">
-<img id="myAvatar" src="https://placehold.co/120x120/202944/white?text=V" alt="Profile">
-<h2 id="myName">My Profile</h2>
-<p id="myEmail" class="muted"></p>
-<div class="stats">
-<div><b id="myPosts">0</b><span class="muted">Posts</span></div>
-<div><b id="myFollowers">0</b><span class="muted">Followers</span></div>
-<div><b id="myFollowing">0</b><span class="muted">Following</span></div>
-</div>
-<button class="primary" onclick="editProfile()">Edit Profile</button>
-</div>
-<div id="myFeed"></div>
-</div>
+ <section id="profile" class="page">
+  <div class="card profile">
+   <img id="profilePhoto" src="https://placehold.co/120x120/202944/fff?text=V" alt="Profile">
+   <h2 id="profileName">My Profile</h2>
+   <p id="profileBio" class="muted">Welcome to VYRONIX</p>
+   <div class="stats">
+    <div><b id="postCount">0</b><span class="muted">Posts</span></div>
+    <div><b id="followerCount">0</b><span class="muted">Followers</span></div>
+    <div><b id="followingCount">0</b><span class="muted">Following</span></div>
+   </div>
+   <button class="primary" onclick="editProfile()">EDIT PROFILE</button>
+   <label class="muted">Change profile photo</label>
+   <input id="profileFile" type="file" accept="image/*" class="field" onchange="uploadAvatar()">
+  </div>
+  <div id="myPosts"></div>
+ </section>
 
-<div id="searchPage" class="hidden card">
-<div class="section-title">Find People</div>
-<input id="searchInput" class="field" placeholder="Search usernames..." oninput="searchUsers()">
-<div id="searchResults"></div>
-</div>
+ <section id="explore" class="page">
+  <div class="title">Explore the World 🌍</div>
+  <div id="exploreFeed"></div>
+ </section>
 
-<div id="explorePage" class="hidden card">
-<div class="section-title">Explore VYRONIX</div>
-<p class="muted">Discover posts from the worldwide community.</p>
-<div id="exploreFeed"></div>
-</div>
+ <section id="search" class="page card">
+  <div class="title">Find People</div>
+  <input id="searchBox" class="field" placeholder="Search username..." oninput="searchPeople()">
+  <div id="searchResults"></div>
+ </section>
 
-<div id="notificationsPage" class="hidden card">
-<div class="section-title">Notifications</div>
-<div id="notifications"><p class="muted">Your notifications will appear here.</p></div>
-</div>
+ <section id="messages" class="page card">
+  <div class="title">Messages</div>
+  <p class="muted">Private real-time chat requires the messaging interface and Firestore chat rules to be configured. Your account system is ready for this integration.</p>
+ </section>
+
+ <section id="live" class="page card">
+  <div class="title">VYRONIX LIVE 🔴</div>
+  <p class="muted">Live video broadcasting needs a streaming provider and a secure live-room server. It is not activated by Firebase Storage alone.</p>
+ </section>
+
+ <section id="sports" class="page card">
+  <div class="title">Live Sports 🏆</div>
+  <p class="muted">Sports scores and schedules need a connected live sports data API.</p>
+ </section>
+
+ <section id="news" class="page card">
+  <div class="title">World News 🌍</div>
+  <p class="muted">Worldwide news needs a licensed news API. Connect a provider to display verified live headlines.</p>
+ </section>
+
+ <section id="market" class="page card">
+  <div class="title">Marketplace 🛍️</div>
+  <p class="muted">Marketplace listings and payments require seller, order, and payment workflows. Payment processing is not enabled yet.</p>
+ </section>
+
+ <section id="notifications" class="page card">
+  <div class="title">Notifications</div>
+  <div id="noticeList" class="muted">Notifications will appear here as notification features are connected.</div>
+ </section>
+
+ <section id="settings" class="page card">
+  <div class="title">Settings ⚙️</div>
+  <button class="nav" onclick="editProfile()">Edit Profile</button>
+  <button class="nav" onclick="changePassword()">Change Password</button>
+  <button class="nav" onclick="logout()">Log Out</button>
+  <p class="muted">VYRONIX · Connect Minds. Create the Future.</p>
+ </section>
 </main>
 
-<aside class="rightbar">
-<div class="card">
-<div class="section-title">Your Account</div>
-<p id="rightName">Welcome!</p>
-<p class="muted">Create, connect and discover.</p>
-</div>
-<div class="card">
-<div class="section-title">About VYRONIX</div>
-<p class="muted">A community for creators, ideas and connections.</p>
-</div>
+<aside class="right">
+ <div class="card">
+  <div class="title">Your Community</div>
+  <p class="muted">Discover creators and share your ideas.</p>
+ </div>
+ <div class="card">
+  <div class="title">About VYRONIX</div>
+  <p class="muted">A place to create, connect and discover.</p>
+ </div>
 </aside>
 </div>
 
 <nav class="bottom">
-<button onclick="showPage('home')"><i data-lucide="house"></i></button>
-<button onclick="showPage('explore')"><i data-lucide="compass"></i></button>
-<button onclick="showPage('create')"><i data-lucide="plus-square"></i></button>
-<button onclick="showPage('notifications')"><i data-lucide="bell"></i></button>
-<button onclick="showPage('profile')"><i data-lucide="user-round"></i></button>
+ <button onclick="openPage('home')"><i data-lucide="house"></i></button>
+ <button onclick="openPage('explore')"><i data-lucide="compass"></i></button>
+ <button onclick="openPage('create')"><i data-lucide="plus-square"></i></button>
+ <button onclick="openPage('messages')"><i data-lucide="message-circle"></i></button>
+ <button onclick="openPage('profile')"><i data-lucide="user-round"></i></button>
 </nav>
 
 <script>
-// STEP 1: Paste your Firebase project configuration here.
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+// VYRONIX FIREBASE CONFIGURATION
+const firebaseConfig={
+ apiKey:"AIzaSyD9yYALiDkL8OwfrdU68uOLez4DlChE5Sk",
+ authDomain:"vyronix-43e0c.firebaseapp.com",
+ projectId:"vyronix-43e0c",
+ storageBucket:"vyronix-43e0c.firebasestorage.app",
+ messagingSenderId:"299446059316",
+ appId:"1:299446059316:web:20b1d92a9dd11c4f032561",
+ measurementId:"G-SJVV6ED5L1"
 };
 
-let auth,db,storage,user=null;
-let postsCache=[];
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth();
+const db=firebase.firestore();
+const storage=firebase.storage();
+let currentUser=null;
+let feedUnsubscribe=null;
 
-function setStatus(message){
- document.getElementById("status").textContent=message;
-}
-function initFirebase(){
- try{
-  if(firebaseConfig.apiKey==="YOUR_API_KEY"){
-   setStatus("Firebase setup required. Add your project configuration.");
-   return;
-  }
-  firebase.initializeApp(firebaseConfig);
-  auth=firebase.auth();
-  db=firebase.firestore();
-  storage=firebase.storage();
+function msg(t){alert(t)}
+function clean(t){return String(t||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function avatar(p){return p||"https://placehold.co/100x100/202944/fff?text=V"}
+function icons(){if(window.lucide)lucide.createIcons()}
 
-  auth.onAuthStateChanged(async current=>{
-   user=current;
-   document.getElementById("authPage").classList.toggle("hidden",!!user);
-   document.getElementById("app").classList.toggle("hidden",!user);
-   if(user){
-    await ensureUser();
-    loadFeed();
-    loadProfile();
-   }
-  });
- }catch(e){setStatus(e.message)}
-}
+auth.onAuthStateChanged(async u=>{
+ currentUser=u;
+ document.getElementById("authScreen").style.display=u?"none":"block";
+ document.getElementById("app").style.display=u?"grid":"none";
+ if(u){
+  await createUserRecord();
+  loadProfile();
+  loadFeed();
+ }else if(feedUnsubscribe){feedUnsubscribe();feedUnsubscribe=null}
+ icons();
+});
 
 async function signup(){
- if(!auth)return alert("Firebase configuration is missing.");
  const email=document.getElementById("email").value.trim();
  const password=document.getElementById("password").value;
  const username=document.getElementById("username").value.trim();
- if(!username)return alert("Enter a username.");
+ if(!username)return msg("Please enter a username.");
  try{
   const result=await auth.createUserWithEmailAndPassword(email,password);
   await db.collection("users").doc(result.user.uid).set({
-   uid:result.user.uid,email,username,photo:"",
-   followers:[],following:[],createdAt:firebase.firestore.FieldValue.serverTimestamp()
+   uid:result.user.uid,email,username,bio:"Welcome to VYRONIX",
+   photo:"",followers:[],following:[],
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
   });
-  alert("Account created successfully!");
- }catch(e){alert(e.message)}
+  msg("Welcome to VYRONIX!");
+ }catch(e){msg(e.message)}
 }
 
 async function login(){
- if(!auth)return alert("Firebase configuration is missing.");
  try{
   await auth.signInWithEmailAndPassword(
    document.getElementById("email").value.trim(),
    document.getElementById("password").value
   );
- }catch(e){alert(e.message)}
+ }catch(e){msg(e.message)}
 }
 
-async function logout(){
- if(auth)await auth.signOut();
-}
+async function logout(){await auth.signOut()}
 
-async function ensureUser(){
- const ref=db.collection("users").doc(user.uid);
- const snap=await ref.get();
- if(!snap.exists){
+async function createUserRecord(){
+ const ref=db.collection("users").doc(currentUser.uid);
+ const s=await ref.get();
+ if(!s.exists){
   await ref.set({
-   uid:user.uid,email:user.email,username:user.email.split("@")[0],
-   photo:"",followers:[],following:[]
+   uid:currentUser.uid,email:currentUser.email,
+   username:currentUser.email.split("@")[0],
+   bio:"Welcome to VYRONIX",photo:"",
+   followers:[],following:[]
   });
  }
 }
 
-function showPage(page){
- const pages=["home","create","profile","search","explore","notifications"];
- pages.forEach(p=>{
-  const el=document.getElementById(p+"Page");
-  if(el)el.classList.toggle("hidden",p!==page);
- });
- if(page==="home")loadFeed();
- if(page==="profile")loadProfile();
- if(page==="explore")loadExplore();
- document.querySelectorAll(".nav").forEach(b=>b.classList.remove("active"));
- lucide.createIcons();
+function openPage(name){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(name)?.classList.add("active");
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ if(name==="profile")loadProfile();
+ if(name==="explore")loadExplore();
+ icons();
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
-async function createPost(){
- if(!user)return;
- const file=document.getElementById("mediaFile").files[0];
+async function publish(){
+ const file=document.getElementById("media").files[0];
  const caption=document.getElementById("caption").value.trim();
- if(!file)return alert("Please select a photo or video.");
- if(file.size>100*1024*1024)return alert("File must be under 100 MB.");
+ if(!file)return msg("Select a photo or video first.");
+ if(file.size>100*1024*1024)return msg("Maximum file size is 100 MB.");
  try{
-  const path="posts/"+user.uid+"/"+Date.now()+"_"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-  const ref=storage.ref(path);
+  const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+  const ref=storage.ref("posts/"+currentUser.uid+"/"+Date.now()+"_"+safe);
   await ref.put(file);
   const url=await ref.getDownloadURL();
   await db.collection("posts").add({
-   uid:user.uid,caption,url,
-   mediaType:file.type.startsWith("video/")?"video":"image",
-   likes:[],createdAt:firebase.firestore.FieldValue.serverTimestamp()
+   uid:currentUser.uid,caption,url,
+   type:file.type.startsWith("video/")?"video":"image",
+   likes:[],
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
   });
   document.getElementById("caption").value="";
-  document.getElementById("mediaFile").value="";
-  alert("Your post is published!");
-  showPage("home");
- }catch(e){alert("Upload failed: "+e.message)}
+  document.getElementById("media").value="";
+  msg("Post published!");
+  openPage("home");
+ }catch(e){msg("Upload error: "+e.message)}
 }
 
-async function loadFeed(){
- const box=document.getElementById("feed");
- if(!db||!user)return;
- try{
-  const snap=await db.collection("posts").orderBy("createdAt","desc").limit(40).get();
-  postsCache=snap.docs.map(d=>({id:d.id,...d.data()}));
+function loadFeed(){
+ if(feedUnsubscribe)feedUnsubscribe();
+ feedUnsubscribe=db.collection("posts")
+ .orderBy("createdAt","desc").limit(40)
+ .onSnapshot(async snap=>{
+  const box=document.getElementById("feed");
   box.innerHTML="";
-  if(!postsCache.length){
-   box.innerHTML='<div class="empty">No posts yet. Be the first creator!</div>';return;
+  if(snap.empty){box.innerHTML='<div class="empty">Be the first to post!</div>';return}
+  for(const d of snap.docs){
+   const el=await makePost({id:d.id,...d.data()});
+   box.appendChild(el);
   }
-  for(const post of postsCache)box.appendChild(await renderPost(post));
- }catch(e){box.innerHTML='<div class="empty">Could not load feed: '+escapeHTML(e.message)+'</div>'}
+ },e=>{document.getElementById("feed").textContent="Feed error: "+e.message});
 }
 
-function escapeHTML(s){
- return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-
-async function renderPost(post){
- const card=document.createElement("article");
- card.className="card";
- const profile=await db.collection("users").doc(post.uid).get();
- const u=profile.exists?profile.data():{username:"VYRONIX User",photo:""};
- const liked=(post.likes||[]).includes(user.uid);
- const media=post.mediaType==="video"
- ?`<video class="post-media" controls playsinline preload="metadata" src="${escapeHTML(post.url)}"></video>`
- :`<img class="post-media" loading="lazy" src="${escapeHTML(post.url)}" alt="Post">`;
- card.innerHTML=`
+async function makePost(p){
+ const s=await db.collection("users").doc(p.uid).get();
+ const u=s.exists?s.data():{username:"VYRONIX User"};
+ const likes=p.likes||[];
+ const liked=likes.includes(currentUser.uid);
+ const article=document.createElement("article");
+ article.className="card";
+ const media=p.type==="video"
+ ?`<video class="post-media" controls playsinline preload="metadata" src="${clean(p.url)}"></video>`
+ :`<img class="post-media" loading="lazy" src="${clean(p.url)}" alt="Post">`;
+ article.innerHTML=`
  <div class="post-head">
- <img class="avatar" src="${escapeHTML(u.photo||"https://placehold.co/100x100/202944/white?text=V")}" alt="">
- <div style="flex:1"><div class="post-user">${escapeHTML(u.username)}</div>
- <span class="muted">VYRONIX creator</span></div>
- ${post.uid!==user.uid?`<button class="action" data-follow="${post.uid}">Follow</button>`:""}
+  <img class="avatar" src="${clean(avatar(u.photo))}" alt="">
+  <div style="flex:1"><div class="post-user">${clean(u.username)}</div><span class="muted">VYRONIX Creator</span></div>
+  ${p.uid!==currentUser.uid?`<button class="action" data-follow>＋ Follow</button>`:""}
  </div>
  ${media}
- <div class="post-text">${escapeHTML(post.caption)}</div>
- <div class="post-actions">
- <button class="action ${liked?"liked":""}" data-like="${post.id}">
- <i data-lucide="heart"></i>${(post.likes||[]).length}</button>
- <button class="action" data-comment="${post.id}"><i data-lucide="message-circle"></i>Comment</button>
- <button class="action" data-share="${post.id}"><i data-lucide="share-2"></i>Share</button>
+ <div class="post-caption">${clean(p.caption)}</div>
+ <div class="actions">
+  <button class="action ${liked?"liked":""}" data-like><i data-lucide="heart"></i>${likes.length} Like</button>
+  <button class="action" data-comment><i data-lucide="message-circle"></i>Comment</button>
+  <button class="action" data-share><i data-lucide="share-2"></i>Share</button>
  </div>
- <div id="comments-${post.id}"></div>`;
- card.querySelector("[data-like]")?.addEventListener("click",()=>toggleLike(post.id));
- card.querySelector("[data-comment]")?.addEventListener("click",()=>addComment(post.id));
- card.querySelector("[data-share]")?.addEventListener("click",()=>sharePost(post));
- card.querySelector("[data-follow]")?.addEventListener("click",e=>followUser(post.uid,e.currentTarget));
- lucide.createIcons({root:card});
- return card;
+ <div id="comments-${p.id}"></div>`;
+ article.querySelector("[data-like]").onclick=()=>toggleLike(p.id);
+ article.querySelector("[data-comment]").onclick=()=>comment(p.id);
+ article.querySelector("[data-share]").onclick=()=>share(p);
+ article.querySelector("[data-follow]")?.addEventListener("click",()=>follow(p.uid));
+ icons();
+ return article;
 }
 
-async function toggleLike(postId){
- const ref=db.collection("posts").doc(postId);
+async function toggleLike(id){
+ const ref=db.collection("posts").doc(id);
  try{
   await db.runTransaction(async tx=>{
-   const snap=await tx.get(ref);
-   if(!snap.exists)return;
-   const likes=snap.data().likes||[];
-   const next=likes.includes(user.uid)?likes.filter(x=>x!==user.uid):[...likes,user.uid];
-   tx.update(ref,{likes:next});
+   const s=await tx.get(ref);
+   if(!s.exists)throw Error("Post not found");
+   const likes=s.data().likes||[];
+   tx.update(ref,{likes:likes.includes(currentUser.uid)?
+    likes.filter(x=>x!==currentUser.uid):[...likes,currentUser.uid]});
   });
-  loadFeed();
- }catch(e){alert(e.message)}
+ }catch(e){msg(e.message)}
 }
 
-async function addComment(postId){
+async function comment(id){
  const text=prompt("Write your comment:");
  if(!text||!text.trim())return;
  try{
-  await db.collection("posts").doc(postId).collection("comments").add({
-   uid:user.uid,text:text.trim(),
+  await db.collection("posts").doc(id).collection("comments").add({
+   uid:currentUser.uid,text:text.trim(),
    createdAt:firebase.firestore.FieldValue.serverTimestamp()
   });
-  alert("Comment added!");
- }catch(e){alert(e.message)}
+  msg("Comment added!");
+ }catch(e){msg(e.message)}
 }
 
-async function sharePost(post){
- const link=location.href.split("#")[0]+"#post="+post.id;
+async function share(p){
+ const url=location.origin+location.pathname+"#post="+p.id;
  try{
-  if(navigator.share)await navigator.share({title:"VYRONIX",text:post.caption||"See this post",url:link});
-  else if(navigator.clipboard){await navigator.clipboard.writeText(link);alert("Link copied!")}
-  else prompt("Copy this link:",link);
+  if(navigator.share)await navigator.share({title:"VYRONIX",text:p.caption||"See this post",url});
+  else{await navigator.clipboard.writeText(url);msg("Link copied!")}
  }catch(e){}
 }
 
-async function followUser(uid,button){
- if(uid===user.uid)return;
- const mine=db.collection("users").doc(user.uid);
- const theirs=db.collection("users").doc(uid);
+async function follow(uid){
+ if(uid===currentUser.uid)return;
+ const a=db.collection("users").doc(currentUser.uid);
+ const b=db.collection("users").doc(uid);
  try{
   await db.runTransaction(async tx=>{
-   const a=await tx.get(mine),b=await tx.get(theirs);
-   if(!a.exists||!b.exists)throw Error("User not found");
-   const following=a.data().following||[];
-   const followers=b.data().followers||[];
+   const x=await tx.get(a),y=await tx.get(b);
+   if(!x.exists||!y.exists)throw Error("User not found");
+   const following=x.data().following||[];
+   const followers=y.data().followers||[];
    if(following.includes(uid)){
-    tx.update(mine,{following:following.filter(x=>x!==uid)});
-    tx.update(theirs,{followers:followers.filter(x=>x!==user.uid)});
+    tx.update(a,{following:following.filter(v=>v!==uid)});
+    tx.update(b,{followers:followers.filter(v=>v!==currentUser.uid)});
    }else{
-    tx.update(mine,{following:[...following,uid]});
-    tx.update(theirs,{followers:[...followers,user.uid]});
+    tx.update(a,{following:[...following,uid]});
+    tx.update(b,{followers:[...followers,currentUser.uid]});
    }
   });
-  button.textContent="Updated";
+  msg("Follow status updated.");
   loadProfile();
- }catch(e){alert(e.message)}
+ }catch(e){msg(e.message)}
 }
 
 async function loadProfile(){
- if(!user)return;
- const snap=await db.collection("users").doc(user.uid).get();
- if(!snap.exists)return;
- const d=snap.data();
- document.getElementById("myName").textContent=d.username||"My Profile";
- document.getElementById("myEmail").textContent=user.email;
- document.getElementById("rightName").textContent="Hello, "+(d.username||"Creator");
- document.getElementById("myAvatar").src=d.photo||"https://placehold.co/120x120/202944/white?text=V";
- document.getElementById("myFollowers").textContent=(d.followers||[]).length;
- document.getElementById("myFollowing").textContent=(d.following||[]).length;
- const posts=await db.collection("posts").where("uid","==",user.uid).get();
- document.getElementById("myPosts").textContent=posts.size;
- const box=document.getElementById("myFeed");
+ if(!currentUser)return;
+ const s=await db.collection("users").doc(currentUser.uid).get();
+ if(!s.exists)return;
+ const u=s.data();
+ document.getElementById("profileName").textContent=u.username||"Creator";
+ document.getElementById("profileBio").textContent=u.bio||"";
+ document.getElementById("profilePhoto").src=avatar(u.photo);
+ document.getElementById("followerCount").textContent=(u.followers||[]).length;
+ document.getElementById("followingCount").textContent=(u.following||[]).length;
+ const posts=await db.collection("posts").where("uid","==",currentUser.uid).get();
+ document.getElementById("postCount").textContent=posts.size;
+ const box=document.getElementById("myPosts");
  box.innerHTML="";
- for(const p of posts.docs){
-  box.appendChild(await renderPost({id:p.id,...p.data()}));
+ for(const d of posts.docs){
+  box.appendChild(await makePost({id:d.id,...d.data()}));
  }
 }
 
 async function editProfile(){
- const snap=await db.collection("users").doc(user.uid).get();
- const d=snap.data();
- const name=prompt("Your username:",d.username||"");
+ const ref=db.collection("users").doc(currentUser.uid);
+ const s=await ref.get(),u=s.data();
+ const name=prompt("Username:",u.username||"");
  if(name===null)return;
- const photo=prompt("Profile photo URL (optional):",d.photo||"");
+ const bio=prompt("Bio:",u.bio||"");
+ if(bio===null)return;
  try{
-  await db.collection("users").doc(user.uid).update({
-   username:name.trim(),photo:photo||""
-  });
+  await ref.update({username:name.trim(),bio:bio.trim()});
   loadProfile();
- }catch(e){alert(e.message)}
+ }catch(e){msg(e.message)}
 }
 
-async function searchUsers(){
- const q=document.getElementById("searchInput").value.trim().toLowerCase();
+async function uploadAvatar(){
+ const file=document.getElementById("profileFile").files[0];
+ if(!file)return;
+ if(!file.type.startsWith("image/"))return msg("Choose an image.");
+ try{
+  const ref=storage.ref("avatars/"+currentUser.uid+"/profile_"+Date.now());
+  await ref.put(file);
+  const url=await ref.getDownloadURL();
+  await db.collection("users").doc(currentUser.uid).update({photo:url});
+  loadProfile();
+  msg("Profile photo updated!");
+ }catch(e){msg(e.message)}
+}
+
+async function searchPeople(){
+ const q=document.getElementById("searchBox").value.trim().toLowerCase();
  const box=document.getElementById("searchResults");
  box.innerHTML="";
  if(q.length<2)return;
@@ -485,11 +489,11 @@ async function searchUsers(){
   const snap=await db.collection("users").limit(100).get();
   snap.docs.forEach(d=>{
    const u=d.data();
-   if(d.id!==user.uid&&(u.username||"").toLowerCase().includes(q)){
-    const div=document.createElement("div");
-    div.className="card";
-    div.textContent=u.username||"User";
-    box.appendChild(div);
+   if(d.id!==currentUser.uid&&(u.username||"").toLowerCase().includes(q)){
+    const el=document.createElement("div");
+    el.className="card";
+    el.textContent=u.username;
+    box.appendChild(el);
    }
   });
  }catch(e){box.textContent=e.message}
@@ -500,12 +504,20 @@ async function loadExplore(){
  box.innerHTML="";
  try{
   const snap=await db.collection("posts").orderBy("createdAt","desc").limit(30).get();
-  for(const d of snap.docs)box.appendChild(await renderPost({id:d.id,...d.data()}));
+  for(const d of snap.docs)box.appendChild(await makePost({id:d.id,...d.data()}));
  }catch(e){box.textContent=e.message}
 }
 
-initFirebase();
-lucide.createIcons();
+async function changePassword(){
+ const password=prompt("Enter new password (minimum 6 characters):");
+ if(!password)return;
+ try{
+  await currentUser.updatePassword(password);
+  msg("Password updated.");
+ }catch(e){msg("Please log in again before changing your password. "+e.message)}
+}
+
+icons();
 </script>
 </body>
 </html>
