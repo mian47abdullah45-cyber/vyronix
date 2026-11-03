@@ -3,404 +3,348 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080811">
-<title>VYRONIX - Connect Minds</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#080812">
+<title>VYRONIX | Create the Future</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#080811;--panel:#151522;--text:#fff;--muted:#999;--pink:#fe2c55;--cyan:#25f4ee}
-body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-header{height:60px;position:fixed;top:0;left:0;right:0;z-index:20;background:#090911ee;backdrop-filter:blur(15px);display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #252535}
-.logo{font-size:24px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,var(--cyan),#fff,var(--pink));background-clip:text;color:transparent}
-.header-actions{display:flex;gap:15px}
-.iconbtn{border:0;background:none;color:white;font-size:22px}
-main{padding-top:60px;padding-bottom:70px;min-height:100vh}
-.page{display:none;padding:18px;max-width:750px;margin:auto}
+:root{--bg:#080812;--surface:#151523;--surface2:#222235;--pink:#ff315c;--cyan:#25e9ed;--white:#fff;--muted:#aaa}
+body{background:var(--bg);color:var(--white);font-family:Arial,sans-serif;overflow-x:hidden}
+button{cursor:pointer;color:inherit;font-family:inherit}
+header{height:62px;position:fixed;z-index:30;top:0;left:0;right:0;background:#090914ee;backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:space-between;padding:0 17px;border-bottom:1px solid #29293a}
+.logo{font-size:25px;font-weight:1000;letter-spacing:1px;background:linear-gradient(100deg,var(--cyan),white,var(--pink));background-clip:text;color:transparent}
+.headright{display:flex;gap:20px}
+.headbtn{background:none;border:0;font-size:24px}
+main{padding-top:62px;padding-bottom:76px;min-height:100dvh}
+.page{display:none;max-width:650px;margin:auto;padding:14px}
 .page.active{display:block}
-.tabs{display:flex;justify-content:center;gap:25px;padding:16px;border-bottom:1px solid #292938}
-.tabs button{border:0;background:none;color:#aaa;font-weight:bold}
-.tabs button.selected{color:white;border-bottom:3px solid var(--pink);padding-bottom:8px}
-.video-feed{height:calc(100dvh - 140px);min-height:450px;max-width:480px;margin:10px auto;position:relative;background:#161622;border-radius:14px;overflow:hidden}
-.video-feed video{width:100%;height:100%;object-fit:cover;background:#111}
-.video-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:radial-gradient(circle at 50% 35%,#352048,#10101c 65%)}
-.video-placeholder strong{font-size:34px}
-.video-placeholder span{color:#ccc}
-.video-info{position:absolute;bottom:18px;left:15px;right:75px;text-shadow:0 2px 8px #000}
-.video-info p{font-size:14px;margin-top:8px}
-.video-actions{position:absolute;right:12px;bottom:65px;display:flex;flex-direction:column;gap:20px;align-items:center}
-.video-actions button{background:#1119;border:0;color:white;font-size:23px;border-radius:50%;width:46px;height:46px}
-.video-actions small{font-size:11px}
-.bottom-nav{position:fixed;z-index:30;bottom:0;left:0;right:0;height:65px;background:#0d0d17;border-top:1px solid #272737;display:flex;justify-content:space-around;align-items:center}
-.bottom-nav button{background:none;border:0;color:#aaa;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.bottom-nav button b{font-size:23px}
-.bottom-nav button.active{color:white}
-.bottom-nav button.active b{color:var(--pink)}
-.card{background:var(--panel);padding:18px;border-radius:16px;margin:15px 0;border:1px solid #29293b}
-input,textarea{width:100%;background:#242435;border:1px solid #37374a;color:white;padding:13px;border-radius:9px;margin:8px 0;outline:none}
-textarea{resize:vertical;min-height:90px}
-.primary{background:linear-gradient(100deg,var(--pink),#9b35e8);color:white;border:0;padding:13px 20px;border-radius:9px;font-weight:bold;width:100%;margin-top:10px}
-.secondary{background:#29293a;color:white;border:1px solid #444;padding:10px 14px;border-radius:9px}
-.muted{color:var(--muted);font-size:13px}
-.profile-top{text-align:center;padding:25px 0}
-.avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(130deg,var(--cyan),#8c36ff,var(--pink));display:grid;place-items:center;margin:auto;font-size:35px;font-weight:bold}
-.stats{display:flex;justify-content:center;gap:35px;margin:20px}
+.bottom{height:70px;position:fixed;z-index:40;bottom:0;left:0;right:0;background:#10101cee;backdrop-filter:blur(20px);border-top:1px solid #303044;display:flex;align-items:center;justify-content:space-around}
+.navbtn{border:0;background:none;color:#9696a8;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;min-width:55px}
+.navbtn .ico{font-size:24px;line-height:27px}
+.navbtn.active{color:white}
+.navbtn.active .ico{color:var(--pink);filter:drop-shadow(0 0 7px #ff315c)}
+.create-nav .ico{font-size:31px;color:white;background:linear-gradient(130deg,var(--pink),#9638ef);width:39px;height:29px;line-height:27px;border-radius:8px}
+.feedtabs{height:45px;display:flex;justify-content:center;gap:30px;align-items:center}
+.feedtabs button{border:0;background:none;color:#999;font-weight:bold;padding:12px 5px}
+.feedtabs button.active{color:white;border-bottom:3px solid var(--pink)}
+.video-card{height:calc(100dvh - 153px);min-height:440px;max-height:900px;position:relative;background:#151522;border-radius:13px;overflow:hidden;margin:7px auto 15px}
+.video-card video{width:100%;height:100%;object-fit:cover;background:#111}
+.placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:radial-gradient(ellipse at 50% 30%,#46204f,#121225 65%,#080812)}
+.placeholder .big{font-size:43px;font-weight:1000;background:linear-gradient(90deg,var(--cyan),white,var(--pink));background-clip:text;color:transparent}
+.placeholder p{color:#bbb}
+.video-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 50%,#0009)}
+.vinfo{position:absolute;left:15px;bottom:18px;right:78px;z-index:2;text-shadow:0 2px 5px #000}
+.vinfo strong{font-size:16px}
+.vinfo p{font-size:14px;margin-top:8px;line-height:1.5}
+.vactions{position:absolute;right:10px;bottom:68px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:15px}
+.action{display:flex;flex-direction:column;align-items:center;gap:4px}
+.action button{height:46px;width:46px;border-radius:50%;background:#171721b8;border:1px solid #ffffff25;backdrop-filter:blur(9px);font-size:23px;display:grid;place-items:center;transition:.2s}
+.action button:active{transform:scale(.85)}
+.action button.liked{color:var(--pink);background:#ff315c25}
+.action button.saved{color:var(--cyan)}
+.action small{font-size:11px;text-shadow:0 1px 4px black}
+.creator-pic{width:43px;height:43px;border-radius:50%;border:2px solid white;object-fit:cover;background:linear-gradient(130deg,var(--cyan),var(--pink));}
+.card{background:var(--surface);border:1px solid #29293b;border-radius:16px;padding:17px;margin:13px 0}
+h2{font-size:23px;margin:8px 0 17px}
+h3{font-size:17px}
+.muted{color:var(--muted);font-size:13px;line-height:1.6}
+input,textarea,select{width:100%;padding:13px;background:#242437;color:white;border:1px solid #3b3b50;border-radius:10px;margin:7px 0;outline:none}
+textarea{min-height:90px}
+.btn{border:0;border-radius:10px;padding:12px 16px;background:linear-gradient(100deg,var(--pink),#9839ed);color:white;font-weight:bold}
+.btn.full{width:100%;margin-top:9px}
+.btn.gray{background:#303044}
+.profile-cover{height:125px;border-radius:15px;background:linear-gradient(120deg,#152c49,#592456,#111322);position:relative;overflow:hidden}
+.profile-cover:after{content:"VYRONIX";position:absolute;right:14px;bottom:12px;font-weight:1000;font-size:28px;color:#ffffff35}
+.profile-head{text-align:center;margin-top:-47px;position:relative}
+.dp{width:96px;height:96px;border-radius:50%;border:4px solid var(--bg);object-fit:cover;background:linear-gradient(140deg,var(--cyan),#8c38ee,var(--pink))}
+.profile-name{font-size:21px;font-weight:bold;margin-top:8px}
+.stats{display:flex;justify-content:center;gap:35px;margin:18px}
 .stats strong{display:block;font-size:20px}
+.stats span{font-size:12px;color:#aaa}
+.profile-actions{display:flex;justify-content:center;gap:9px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.grid video,.grid .tile{width:100%;aspect-ratio:3/4;object-fit:cover;background:#252538}
-.grid .tile{display:grid;place-items:center;color:#aaa;font-size:12px;text-align:center}
-.row{display:flex;align-items:center;gap:12px;margin:15px 0}
-.row span{flex:1}
-.result{padding:13px;border-bottom:1px solid #333}
-.modal{position:fixed;inset:0;background:#000c;z-index:50;display:grid;place-items:center;padding:16px}
-.modal-box{background:#171724;border:1px solid #39394b;padding:22px;border-radius:18px;width:min(420px,100%);max-height:90vh;overflow:auto}
-.modal-box h2{margin-bottom:15px}
-.close{float:right;background:none;border:0;color:white;font-size:25px}
-label{font-size:13px;color:#bbb}
-.notice{background:#242436;padding:12px;border-radius:10px;margin:10px 0;color:#ddd;font-size:13px}
-.feed-list{display:flex;flex-direction:column;gap:10px}
-.comment{padding:10px;background:#252536;border-radius:8px;margin:6px 0}
-#toast{position:fixed;z-index:100;bottom:80px;left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:12px 20px;border-radius:30px;display:none}
-@media(min-width:800px){
-.bottom-nav{width:480px;left:50%;transform:translateX(-50%);border-radius:15px 15px 0 0}
-}
+.grid-item{aspect-ratio:3/4;background:#222236;position:relative;overflow:hidden;border-radius:5px}
+.grid-item video{width:100%;height:100%;object-fit:cover}
+.grid-item span{position:absolute;bottom:7px;left:7px;font-size:12px;text-shadow:0 1px 5px black}
+.setting-row{display:flex;align-items:center;gap:12px;padding:15px 2px;border-bottom:1px solid #333344}
+.setting-row .sicon{width:38px;height:38px;background:#29293d;border-radius:12px;display:grid;place-items:center;font-size:19px}
+.setting-row .details{flex:1}
+.setting-row b{font-size:14px}
+.setting-row small{display:block;color:#999;margin-top:4px}
+.setting-row button{background:none;border:0;color:#aaa;font-size:20px}
+.modal{position:fixed;z-index:80;inset:0;background:#000d;display:grid;place-items:center;padding:15px}
+.modalbox{background:#171725;border:1px solid #38384b;border-radius:18px;padding:20px;width:min(420px,100%);max-height:90vh;overflow:auto}
+.modalbox h2{margin-bottom:12px}
+.close{float:right;border:0;background:none;font-size:25px;color:white}
+.comment{padding:12px;background:#29293a;border-radius:9px;margin:7px 0;font-size:14px}
+#toast{display:none;position:fixed;z-index:100;bottom:85px;left:50%;transform:translateX(-50%);background:white;color:#111;padding:12px 18px;border-radius:30px;font-size:13px;white-space:nowrap}
+.badge{background:#ff315c22;color:#ff718b;border-radius:20px;padding:5px 9px;font-size:11px}
+@media(min-width:700px){.bottom{max-width:650px;left:50%;transform:translateX(-50%);border-radius:15px 15px 0 0}.video-card{max-width:420px}}
 </style>
 </head>
 <body>
 
 <header>
  <div class="logo">VYRONIX</div>
- <div class="header-actions">
-  <button class="iconbtn" onclick="showPage('search')">⌕</button>
-  <button class="iconbtn" onclick="showPage('inbox')">✉</button>
+ <div class="headright">
+  <button class="headbtn" onclick="page('search')">⌕</button>
+  <button class="headbtn" onclick="page('inbox')">♧</button>
  </div>
 </header>
 
 <main>
 <!-- HOME -->
-<section id="home" class="page active">
- <div class="tabs">
-  <button class="selected" onclick="feedMode('following',this)">Following</button>
-  <button onclick="feedMode('forYou',this)">For You</button>
+<section class="page active" id="home">
+ <div class="feedtabs">
+  <button onclick="mode('following',this)">Following</button>
+  <button class="active" onclick="mode('foryou',this)">For You</button>
  </div>
- <div id="feed" class="feed-list"></div>
+ <div id="feed"></div>
 </section>
 
-<!-- DISCOVER -->
-<section id="search" class="page">
- <h2>Discover</h2>
- <input id="searchInput" placeholder="Search people, videos, hashtags..." oninput="searchUsers()">
+<!-- SEARCH -->
+<section class="page" id="search">
+ <h2>Discover 🔎</h2>
+ <input id="searchText" placeholder="Search videos, creators, hashtags..." oninput="search()">
+ <div class="card">
+  <h3>🔥 Trending topics</h3>
+  <p style="margin-top:13px">#VYRONIX &nbsp; #Music &nbsp; #Sports</p>
+  <p style="margin-top:10px">#Gaming &nbsp; #Travel &nbsp; #Funny</p>
+  <p style="margin-top:10px">#Technology &nbsp; #News &nbsp; #Creative</p>
+ </div>
  <div id="searchResults"></div>
- <div class="card">
-  <h3>Trending hashtags</h3>
-  <p style="margin-top:12px">#VYRONIX #Trending #Music #Gaming #Travel #Comedy</p>
- </div>
 </section>
 
-<!-- UPLOAD -->
-<section id="upload" class="page">
- <h2>Create a video</h2>
+<!-- CREATE -->
+<section class="page" id="create">
+ <h2>＋ Create Video</h2>
  <div class="card">
-  <label>Select video from your phone</label>
-  <input id="videoFile" type="file" accept="video/*">
-  <video id="preview" controls class="hidden" style="width:100%;margin-top:12px;border-radius:10px"></video>
-  <label>Caption</label>
-  <textarea id="caption" placeholder="Write a caption... #VYRONIX"></textarea>
-  <label>Cover / description</label>
-  <p class="muted">Choose a video and publish it to your feed.</p>
-  <button class="primary" onclick="publishVideo()">PUBLISH VIDEO</button>
-  <div class="notice">Demo mode: videos are shown on this device. Connect Firebase Storage to publish videos online.</div>
+  <h3>Upload your video</h3>
+  <p class="muted">Choose a video from your gallery.</p>
+  <input type="file" id="videoFile" accept="video/*">
+  <video id="preview" controls style="display:none;width:100%;max-height:300px;border-radius:12px"></video>
+  <label class="muted">Caption</label>
+  <textarea id="caption" placeholder="Share your moment... #VYRONIX"></textarea>
+  <label class="muted">Who can view?</label>
+  <select id="visibility"><option>Public</option><option>Private</option></select>
+  <button class="btn full" onclick="publish()">Publish Video 🚀</button>
+  <p class="muted" style="margin-top:12px">Online publishing requires Firebase Storage and database connection.</p>
  </div>
 </section>
 
 <!-- INBOX -->
-<section id="inbox" class="page">
- <h2>Inbox</h2>
- <div class="card">
-  <h3>Messages</h3>
-  <p class="muted" style="margin-top:10px">Your conversations will appear here.</p>
-  <button class="secondary" onclick="toast('Connect a messaging backend to enable chat')">Open messages</button>
- </div>
+<section class="page" id="inbox">
+ <h2>Inbox ♡</h2>
  <div class="card">
   <h3>Notifications</h3>
-  <div id="notifications">No new notifications.</div>
+  <div id="notices" class="muted" style="margin-top:15px">Welcome to VYRONIX!</div>
+ </div>
+ <div class="card">
+  <h3>Messages</h3>
+  <p class="muted">Your chats will appear here after online messaging is connected.</p>
+  <button class="btn full" onclick="toast('Online messaging backend required')">Open Messages</button>
  </div>
 </section>
 
 <!-- PROFILE -->
-<section id="profile" class="page">
- <div class="profile-top">
-  <div class="avatar" id="avatar">V</div>
-  <h2 id="profileName" style="margin-top:12px">VYRONIX Creator</h2>
-  <p class="muted" id="profileHandle">@creator</p>
+<section class="page" id="profile">
+ <div class="profile-cover"></div>
+ <div class="profile-head">
+  <img id="dp" class="dp" src="" alt="Profile picture">
+  <div class="profile-name" id="pname">VYRONIX Creator</div>
+  <p class="muted" id="handle">@creator</p>
   <div class="stats">
-   <div><strong id="postCount">0</strong><small>Posts</small></div>
-   <div><strong id="followers">0</strong><small>Followers</small></div>
-   <div><strong id="following">0</strong><small>Following</small></div>
+   <div><strong id="postsCount">0</strong><span>Posts</span></div>
+   <div><strong id="followers">0</strong><span>Followers</span></div>
+   <div><strong id="following">0</strong><span>Following</span></div>
   </div>
-  <p id="bio">Welcome to my VYRONIX profile!</p>
-  <button class="secondary" onclick="openModal('editModal')">Edit profile</button>
-  <button class="secondary" onclick="openModal('authModal')">Login / Signup</button>
+  <p id="bio" class="muted">Welcome to my VYRONIX profile ✨</p>
+  <div class="profile-actions" style="margin:15px">
+   <button class="btn" onclick="openModal('edit')">Edit Profile</button>
+   <button class="btn gray" onclick="openModal('auth')">Account</button>
+  </div>
  </div>
- <h3 style="margin:15px 0">My videos</h3>
- <div id="myGrid" class="grid"></div>
+ <div class="card">
+  <h3>My Videos 🎬</h3>
+  <div class="grid" id="myGrid" style="margin-top:12px"></div>
+ </div>
 </section>
 
 <!-- SETTINGS -->
-<section id="settings" class="page">
- <h2>Settings & Privacy</h2>
+<section class="page" id="settings">
+ <h2>Settings & Privacy ⚙️</h2>
  <div class="card">
-  <h3>Account</h3>
-  <div class="row"><span>Login / Signup</span><button class="secondary" onclick="openModal('authModal')">Open</button></div>
-  <div class="row"><span>Edit profile</span><button class="secondary" onclick="openModal('editModal')">Edit</button></div>
+  <h3>Account management</h3>
+  <div class="setting-row"><div class="sicon">👤</div><div class="details"><b>Account information</b><small>Username and personal details</small></div><button onclick="openModal('edit')">›</button></div>
+  <div class="setting-row"><div class="sicon">🔐</div><div class="details"><b>Security</b><small>Password and account protection</small></div><button onclick="toast('Connect Firebase Authentication')">›</button></div>
+  <div class="setting-row"><div class="sicon">📱</div><div class="details"><b>Login & devices</b><small>Manage signed-in devices</small></div><button onclick="openModal('auth')">›</button></div>
  </div>
  <div class="card">
   <h3>Privacy</h3>
-  <div class="row"><span>Private account</span><input type="checkbox" id="privateAccount" style="width:auto"></div>
-  <div class="row"><span>Allow comments</span><input type="checkbox" id="allowComments" checked style="width:auto"></div>
-  <div class="row"><span>Dark appearance</span><input type="checkbox" checked disabled style="width:auto"></div>
+  <div class="setting-row"><div class="sicon">🔒</div><div class="details"><b>Private account</b><small>Only approved followers</small></div><input id="private" type="checkbox" style="width:22px"></div>
+  <div class="setting-row"><div class="sicon">💬</div><div class="details"><b>Allow comments</b><small>Control video comments</small></div><input id="commentsAllowed" type="checkbox" checked style="width:22px"></div>
+  <div class="setting-row"><div class="sicon">🔔</div><div class="details"><b>Notifications</b><small>Likes and new followers</small></div><input type="checkbox" checked style="width:22px"></div>
+  <div class="setting-row"><div class="sicon">🚫</div><div class="details"><b>Blocked accounts</b><small>Manage blocked users</small></div><button onclick="toast('No blocked accounts')">›</button></div>
  </div>
  <div class="card">
-  <h3>Support</h3>
-  <div class="row"><span>About VYRONIX</span><button class="secondary" onclick="aboutApp()">View</button></div>
-  <div class="row"><span>Help Center</span><button class="secondary" onclick="toast('Help center coming soon')">Help</button></div>
-  <button class="primary" onclick="logout()">Log out</button>
+  <h3>App preferences</h3>
+  <div class="setting-row"><div class="sicon">🌙</div><div class="details"><b>Dark mode</b><small>Dark appearance</small></div><input type="checkbox" checked disabled style="width:22px"></div>
+  <div class="setting-row"><div class="sicon">🌍</div><div class="details"><b>Language</b><small>English</small></div><button onclick="toast('More languages coming soon')">›</button></div>
+  <div class="setting-row"><div class="sicon">📶</div><div class="details"><b>Data saver</b><small>Reduce video data usage</small></div><input type="checkbox" style="width:22px"></div>
+ </div>
+ <div class="card">
+  <h3>Help & About</h3>
+  <div class="setting-row"><div class="sicon">❓</div><div class="details"><b>Help Center</b><small>Get help and support</small></div><button onclick="toast('Help center coming soon')">›</button></div>
+  <div class="setting-row"><div class="sicon">ℹ️</div><div class="details"><b>About VYRONIX</b><small>Version 2.0</small></div><button onclick="toast('VYRONIX - Connect Minds. Create the Future.')">›</button></div>
+  <button class="btn full" onclick="logout()">Log out</button>
  </div>
 </section>
 </main>
 
-<nav class="bottom-nav">
- <button class="active" onclick="showPage('home',this)"><b>⌂</b>Home</button>
- <button onclick="showPage('search',this)"><b>⌕</b>Discover</button>
- <button onclick="showPage('upload',this)"><b>＋</b>Create</button>
- <button onclick="showPage('inbox',this)"><b>♡</b>Inbox</button>
- <button onclick="showPage('profile',this)"><b>◉</b>Profile</button>
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom">
+ <button class="navbtn active" onclick="page('home',this)"><span class="ico">⌂</span>Home</button>
+ <button class="navbtn" onclick="page('search',this)"><span class="ico">⌕</span>Discover</button>
+ <button class="navbtn create-nav" onclick="page('create',this)"><span class="ico">＋</span>Create</button>
+ <button class="navbtn" onclick="page('inbox',this)"><span class="ico">♡</span>Inbox</button>
+ <button class="navbtn" onclick="page('profile',this)"><span class="ico">◉</span>Profile</button>
 </nav>
 
-<!-- AUTH MODAL -->
-<div class="modal hidden" id="authModal">
- <div class="modal-box">
-  <button class="close" onclick="closeModal('authModal')">×</button>
+<!-- PROFILE EDIT -->
+<div class="modal" id="edit" style="display:none">
+ <div class="modalbox">
+  <button class="close" onclick="closeModal('edit')">×</button>
+  <h2>Edit Profile</h2>
+  <img id="editDPPreview" class="dp" style="display:block;margin:10px auto">
+  <label class="muted">Profile picture</label>
+  <input type="file" id="dpFile" accept="image/*">
+  <label class="muted">Name</label><input id="editName" placeholder="Your name">
+  <label class="muted">Username</label><input id="editHandle" placeholder="username">
+  <label class="muted">Bio</label><textarea id="editBio" placeholder="Tell people about yourself"></textarea>
+  <button class="btn full" onclick="saveProfile()">Save Profile</button>
+ </div>
+</div>
+
+<!-- AUTH -->
+<div class="modal" id="auth" style="display:none">
+ <div class="modalbox">
+  <button class="close" onclick="closeModal('auth')">×</button>
   <h2>Welcome to VYRONIX</h2>
-  <input id="authName" placeholder="Your name (for signup)">
+  <input id="authName" placeholder="Full name">
   <input id="authEmail" type="email" placeholder="Email address">
-  <input id="authPassword" type="password" placeholder="Password">
-  <button class="primary" onclick="signup()">Create account</button>
-  <button class="secondary" style="width:100%;margin-top:8px" onclick="login()">Login</button>
-  <p class="muted" style="margin-top:12px">Without Firebase configuration, this is a local demo login only.</p>
+  <input id="authPass" type="password" placeholder="Password (6+ characters)">
+  <button class="btn full" onclick="signup()">Create Account</button>
+  <button class="btn gray full" onclick="login()">Login</button>
+  <p class="muted" style="margin-top:12px">Demo login only until Firebase is connected.</p>
  </div>
 </div>
 
-<!-- EDIT MODAL -->
-<div class="modal hidden" id="editModal">
- <div class="modal-box">
-  <button class="close" onclick="closeModal('editModal')">×</button>
-  <h2>Edit profile</h2>
-  <input id="editName" placeholder="Your name">
-  <input id="editHandle" placeholder="Username">
-  <textarea id="editBio" placeholder="Your bio"></textarea>
-  <button class="primary" onclick="saveProfile()">Save changes</button>
- </div>
-</div>
-
-<!-- COMMENTS MODAL -->
-<div class="modal hidden" id="commentsModal">
- <div class="modal-box">
+<!-- COMMENTS -->
+<div class="modal" id="commentsModal" style="display:none">
+ <div class="modalbox">
   <button class="close" onclick="closeModal('commentsModal')">×</button>
-  <h2>Comments</h2>
+  <h2>Comments 💬</h2>
   <div id="commentList"></div>
-  <input id="commentInput" placeholder="Add a comment...">
-  <button class="primary" onclick="addComment()">Post comment</button>
+  <input id="commentInput" placeholder="Write a comment...">
+  <button class="btn full" onclick="addComment()">Post comment</button>
  </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
-let posts=[];
-let currentUser=null;
-let currentPost=null;
-let currentMode='forYou';
-let previewURL=null;
-let selectedFile=null;
-let followingUsers=[];
-
-const samplePosts=[
- {id:1,name:"VYRONIX",handle:"@vyronix",caption:"Welcome to VYRONIX! Connect Minds. Create the Future. ✨ #VYRONIX",likes:120,comments:[],src:"",owner:"VYRONIX"},
- {id:2,name:"Creator",handle:"@creator",caption:"Create something amazing today! 🚀 #Creative",likes:85,comments:[],src:"",owner:"Creator"}
+const $=id=>document.getElementById(id);
+let posts=[],user=null,following=[],modeType='foryou',currentPost=null,videoURL=null,selectedVideo=null,profilePic='';
+const defaultPic='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g"><stop stop-color="#25e9ed"/><stop offset="1" stop-color="#ff315c"/></linearGradient></defs><rect width="100" height="100" rx="50" fill="url(#g)"/><text x="50" y="64" text-anchor="middle" font-size="43" font-weight="bold" fill="white">V</text></svg>');
+const samples=[
+{id:1,name:'VYRONIX Official',handle:'@vyronix',caption:'Welcome to VYRONIX! ✨ Connect Minds. Create the Future. #VYRONIX',likes:120,comments:[],src:'',owner:'VYRONIX Official'},
+{id:2,name:'Creator',handle:'@creator',caption:'Share your creativity with the world 🚀 #Creative',likes:65,comments:[],src:'',owner:'Creator'}
 ];
-
-function loadData(){
- try{
-  posts=JSON.parse(localStorage.getItem('vx_posts')||'[]');
-  if(!posts.length)posts=samplePosts;
-  currentUser=JSON.parse(localStorage.getItem('vx_user')||'null');
-  followingUsers=JSON.parse(localStorage.getItem('vx_following')||'[]');
- }catch(e){posts=samplePosts}
- updateProfile();
- renderFeed();
+function toast(s){$('toast').textContent=s;$('toast').style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>$('toast').style.display='none',2300)}
+function safe(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function store(){
+ try{localStorage.setItem('vx2_posts',JSON.stringify(posts.map(p=>({...p,src:p.src?.startsWith('blob:')?'':p.src}))))}catch(e){}
 }
-
-function saveData(){
- try{localStorage.setItem('vx_posts',JSON.stringify(posts));}catch(e){toast('Storage full. Connect online storage for videos.')}
+function load(){
+ try{posts=JSON.parse(localStorage.getItem('vx2_posts')||'null')||samples;user=JSON.parse(localStorage.getItem('vx2_user')||'null');following=JSON.parse(localStorage.getItem('vx2_follow')||'[]');profilePic=localStorage.getItem('vx2_dp')||''}catch(e){posts=samples}
+ updateProfile();render();
 }
-function toast(msg){
- const t=document.getElementById('toast');
- t.textContent=msg;t.style.display='block';
- clearTimeout(window.toastTimer);
- window.toastTimer=setTimeout(()=>t.style.display='none',2500);
-}
-function showPage(id,btn){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+function page(id,btn){
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+ $(id).classList.add('active');
+ document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));
  if(btn)btn.classList.add('active');
+ else{let b=[...document.querySelectorAll('.navbtn')].find(x=>x.getAttribute('onclick')?.includes("'"+id+"'"));if(b)b.classList.add('active')}
  if(id==='profile')updateProfile();
- if(id==='home')renderFeed();
+ if(id==='home')render();
 }
-function feedMode(mode,btn){
- currentMode=mode;
- document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('selected'));
- btn.classList.add('selected');
- renderFeed();
-}
-function renderFeed(){
- const feed=document.getElementById('feed');
- const list=currentMode==='following'?posts.filter(p=>p.owner==='VYRONIX'||followingUsers.includes(p.owner)):posts;
- feed.innerHTML='';
- if(!list.length){feed.innerHTML='<div class="card">No videos yet. Follow creators or upload your first video!</div>';return;}
- list.slice().reverse().forEach(p=>{
-  const item=document.createElement('div');
-  item.className='video-feed';
-  const video=p.src?'<video src="'+p.src+'" controls playsinline loop></video>':'<div class="video-placeholder"><strong>VYRONIX</strong><span>Connect Minds. Create the Future.</span><span>▶</span></div>';
-  item.innerHTML=video+
-   '<div class="video-info"><strong>'+escapeHTML(p.name)+'</strong><p>'+escapeHTML(p.caption)+'</p></div>'+
-   '<div class="video-actions">'+
-   '<button onclick="likePost('+p.id+')">♥</button><small>'+p.likes+'</small>'+
-   '<button onclick="openComments('+p.id+')">▢</button><small>'+p.comments.length+'</small>'+
-   '<button onclick="sharePost('+p.id+')">↗</button><small>Share</small>'+
-   '<button onclick="savePost('+p.id+')">☆</button><small>Save</small>'+
-   '<button onclick="followPost('+p.id+')">＋</button><small>Follow</small>'+
-   '</div>';
-  feed.appendChild(item);
+function mode(m,b){modeType=m;document.querySelectorAll('.feedtabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
+function render(){
+ let arr=modeType==='following'?posts.filter(p=>p.owner==='VYRONIX Official'||following.includes(p.owner)):posts;
+ $('feed').innerHTML='';
+ if(!arr.length){$('feed').innerHTML='<div class="card">No videos found. Follow creators or upload your first video!</div>';return}
+ arr.slice().reverse().forEach(p=>{
+  let card=document.createElement('article');card.className='video-card';
+  let media=p.src?'<video src="'+p.src+'" controls playsinline loop></video>':'<div class="placeholder"><div class="big">VYRONIX</div><p>Connect Minds. Create the Future.</p><span style="font-size:36px">▶</span></div>';
+  card.innerHTML=media+'<div class="video-shade"></div><div class="vinfo"><strong>'+safe(p.name)+'</strong><p>'+safe(p.caption)+'</p></div><div class="vactions">'+
+  '<div class="action"><img class="creator-pic" src="'+(profilePic||defaultPic)+'"></div>'+
+  '<div class="action"><button onclick="like('+p.id+',this)">♥</button><small>'+p.likes+'</small></div>'+
+  '<div class="action"><button onclick="comments('+p.id+')">▢</button><small>'+p.comments.length+'</small></div>'+
+  '<div class="action"><button onclick="share('+p.id+')">↗</button><small>Share</small></div>'+
+  '<div class="action"><button onclick="save('+p.id+',this)">☆</button><small>Save</small></div>'+
+  '<div class="action"><button onclick="follow('+p.id+')">＋</button><small>Follow</small></div></div>';
+  $('feed').appendChild(card);
  });
 }
-function escapeHTML(s){
- return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function like(id,b){let p=posts.find(x=>x.id===id);if(!p)return;p.likes++;b.classList.add('liked');b.textContent='♥';b.nextElementSibling.textContent=p.likes;store()}
+function save(id,b){let s=JSON.parse(localStorage.getItem('vx2_saved')||'[]');if(!s.includes(id))s.push(id);localStorage.setItem('vx2_saved',JSON.stringify(s));b.classList.add('saved');b.textContent='★';toast('Video saved')}
+function share(id){let url=location.href.split('#')[0]+'#video-'+id;if(navigator.share)navigator.share({title:'VYRONIX video',url}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Video link copied'));else toast(url)}
+function follow(id){let p=posts.find(x=>x.id===id);if(!p)return;if(!following.includes(p.owner)){following.push(p.owner);localStorage.setItem('vx2_follow',JSON.stringify(following));toast('Following '+p.name)}else toast('Already following')}
+function comments(id){currentPost=id;let p=posts.find(x=>x.id===id);$('commentList').innerHTML=p.comments.map(c=>'<div class="comment">'+safe(c)+'</div>').join('')||'<p class="muted">No comments yet.</p>';openModal('commentsModal')}
+function addComment(){let v=$('commentInput').value.trim();if(!v)return;let p=posts.find(x=>x.id===currentPost);if(!$('commentsAllowed').checked){toast('Comments are disabled');return}p.comments.push(v);$('commentInput').value='';store();comments(currentPost);render()}
+$('videoFile').addEventListener('change',e=>{selectedVideo=e.target.files[0];if(!selectedVideo)return;if(!selectedVideo.type.startsWith('video/')){toast('Select a video');return}if(videoURL)URL.revokeObjectURL(videoURL);videoURL=URL.createObjectURL(selectedVideo);$('preview').src=videoURL;$('preview').style.display='block'});
+function publish(){
+ if(!selectedVideo){toast('Please select a video');return}
+ let p={id:Date.now(),name:user?.name||'Creator',handle:'@creator',caption:$('caption').value,likes:0,comments:[],src:videoURL,owner:user?.name||'Creator'};
+ posts.push(p);store();selectedVideo=null;videoURL=null;$('videoFile').value='';$('caption').value='';$('preview').style.display='none';page('home');render();toast('Video published on this device!');
 }
-function likePost(id){
- let p=posts.find(x=>x.id===id);if(!p)return;
- p.likes++;saveData();renderFeed();toast('Liked!');
-}
-function sharePost(id){
- const url=location.href+'#video-'+id;
- if(navigator.share)navigator.share({title:'VYRONIX video',url}).catch(()=>{});
- else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied!'));
- else toast('Share is not available on this browser.');
-}
-function savePost(id){
- let saved=JSON.parse(localStorage.getItem('vx_saved')||'[]');
- if(!saved.includes(id))saved.push(id);
- localStorage.setItem('vx_saved',JSON.stringify(saved));
- toast('Video saved!');
-}
-function followPost(id){
- const p=posts.find(x=>x.id===id);if(!p)return;
- if(!followingUsers.includes(p.owner)){followingUsers.push(p.owner);localStorage.setItem('vx_following',JSON.stringify(followingUsers));toast('Following '+p.name);}
- else toast('Already following');
-}
-function openComments(id){
- currentPost=id;
- const p=posts.find(x=>x.id===id);
- document.getElementById('commentList').innerHTML=p.comments.map(c=>'<div class="comment">'+escapeHTML(c)+'</div>').join('')||'<p class="muted">No comments yet.</p>';
- openModal('commentsModal');
-}
-function addComment(){
- const value=document.getElementById('commentInput').value.trim();
- if(!value)return;
- const p=posts.find(x=>x.id===currentPost);
- p.comments.push(value);
- document.getElementById('commentInput').value='';
- saveData();openComments(currentPost);renderFeed();
-}
-document.getElementById('videoFile').addEventListener('change',e=>{
- selectedFile=e.target.files[0];
- if(!selectedFile)return;
- if(!selectedFile.type.startsWith('video/')){toast('Please select a video file');return;}
- if(previewURL)URL.revokeObjectURL(previewURL);
- previewURL=URL.createObjectURL(selectedFile);
- const v=document.getElementById('preview');
- v.src=previewURL;v.classList.remove('hidden');
-});
-function publishVideo(){
- if(!selectedFile){toast('Select a video first');return;}
- const caption=document.getElementById('caption').value;
- const p={id:Date.now(),name:currentUser?.name||'Creator',handle:'@creator',caption,likes:0,comments:[],src:previewURL,owner:currentUser?.name||'Creator'};
- posts.push(p);
- saveData();
- selectedFile=null;
- document.getElementById('videoFile').value='';
- document.getElementById('caption').value='';
- document.getElementById('preview').classList.add('hidden');
- previewURL=null;
- showPage('home',document.querySelector('.bottom-nav button'));
- toast('Video added to this device!');
-}
-function openModal(id){document.getElementById(id).classList.remove('hidden')}
-function closeModal(id){document.getElementById(id).classList.add('hidden')}
-function signup(){
- const name=document.getElementById('authName').value.trim();
- const email=document.getElementById('authEmail').value.trim();
- const password=document.getElementById('authPassword').value;
- if(!name||!email||password.length<6){toast('Enter name, email and 6+ character password');return;}
- currentUser={name,email};
- localStorage.setItem('vx_user',JSON.stringify(currentUser));
- closeModal('authModal');updateProfile();toast('Local demo account created!');
-}
-function login(){
- const email=document.getElementById('authEmail').value.trim();
- const password=document.getElementById('authPassword').value;
- if(!email||!password){toast('Enter email and password');return;}
- const user=JSON.parse(localStorage.getItem('vx_user')||'null');
- if(user&&user.email===email){currentUser=user;updateProfile();closeModal('authModal');toast('Logged in!');}
- else toast('No local demo account found. Signup first.');
-}
-function logout(){
- currentUser=null;localStorage.removeItem('vx_user');updateProfile();toast('Logged out');
-}
+function openModal(id){$(id).style.display='grid'}
+function closeModal(id){$(id).style.display='none'}
+$('dpFile').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return toast('Choose an image');let r=new FileReader();r.onload=()=>{$('editDPPreview').src=r.result;profilePic=r.result};r.readAsDataURL(f)});
 function saveProfile(){
- if(!currentUser)currentUser={name:'Creator',email:''};
- currentUser.name=document.getElementById('editName').value||'Creator';
- currentUser.handle=document.getElementById('editHandle').value||'creator';
- currentUser.bio=document.getElementById('editBio').value;
- localStorage.setItem('vx_user',JSON.stringify(currentUser));
- updateProfile();closeModal('editModal');toast('Profile updated!');
+ user=user||{email:''};user.name=$('editName').value.trim()||'Creator';user.handle=$('editHandle').value.trim()||'creator';user.bio=$('editBio').value;
+ try{localStorage.setItem('vx2_user',JSON.stringify(user));if(profilePic)localStorage.setItem('vx2_dp',profilePic)}catch(e){toast('Image too large. Use a smaller photo.');return}
+ updateProfile();closeModal('edit');toast('Profile updated!')
 }
 function updateProfile(){
- const u=currentUser||{name:'VYRONIX Creator',handle:'creator',bio:'Welcome to my VYRONIX profile!'};
- document.getElementById('profileName').textContent=u.name;
- document.getElementById('profileHandle').textContent='@'+(u.handle||'creator');
- document.getElementById('bio').textContent=u.bio||'Welcome to VYRONIX!';
- document.getElementById('avatar').textContent=(u.name||'V')[0].toUpperCase();
- const mine=posts.filter(p=>currentUser&&p.owner===currentUser.name);
- document.getElementById('postCount').textContent=mine.length;
- document.getElementById('followers').textContent=followingUsers.length;
- document.getElementById('following').textContent=followingUsers.length;
- document.getElementById('editName').value=u.name||'';
- document.getElementById('editHandle').value=u.handle||'';
- document.getElementById('editBio').value=u.bio||'';
- document.getElementById('myGrid').innerHTML=mine.map(p=>'<div class="tile">▶ Video</div>').join('');
+ let u=user||{name:'VYRONIX Creator',handle:'creator',bio:'Welcome to VYRONIX ✨'};
+ $('pname').textContent=u.name;$('handle').textContent='@'+(u.handle||'creator');$('bio').textContent=u.bio||'Welcome to VYRONIX';
+ $('dp').src=profilePic||defaultPic;$('editDPPreview').src=profilePic||defaultPic;
+ $('editName').value=u.name;$('editHandle').value=u.handle||'';$('editBio').value=u.bio||'';
+ let mine=posts.filter(p=>user&&p.owner===user.name);
+ $('postsCount').textContent=mine.length;$('followers').textContent=following.length;$('following').textContent=following.length;
+ $('myGrid').innerHTML=mine.map(p=>'<div class="grid-item">'+(p.src?'<video src="'+p.src+'"></video>':'<span>VYRONIX ▶</span>')+'</div>').join('');
 }
-function searchUsers(){
- const q=document.getElementById('searchInput').value.toLowerCase();
- const results=document.getElementById('searchResults');
- const names=[...new Set(posts.map(p=>p.name))].filter(n=>n.toLowerCase().includes(q));
- results.innerHTML=names.map(n=>'<div class="result">◉ '+escapeHTML(n)+'</div>').join('')||'<p class="muted">No creators found.</p>';
+function signup(){
+ let name=$('authName').value.trim(),email=$('authEmail').value.trim(),pass=$('authPass').value;
+ if(!name||!email||pass.length<6)return toast('Enter name, email and password (6+ characters)');
+ user={name,email,handle:name.toLowerCase().replace(/\s/g,''),bio:'Welcome to my VYRONIX profile'};
+ try{localStorage.setItem('vx2_user',JSON.stringify(user))}catch(e){}
+ updateProfile();closeModal('auth');toast('Local demo account created');
 }
-function aboutApp(){toast('VYRONIX - Connect Minds. Create the Future.')}
-loadData();
+function login(){
+ let email=$('authEmail').value.trim(),pass=$('authPass').value;
+ let old=JSON.parse(localStorage.getItem('vx2_user')||'null');
+ if(old&&old.email===email&&pass.length>=6){user=old;updateProfile();closeModal('auth');toast('Logged in')}
+ else toast('No matching local demo account. Signup first.')
+}
+function logout(){user=null;localStorage.removeItem('vx2_user');updateProfile();toast('Logged out')}
+function search(){
+ let q=$('searchText').value.toLowerCase();
+ let matches=posts.filter(p=>(p.name+' '+p.caption).toLowerCase().includes(q));
+ $('searchResults').innerHTML=matches.map(p=>'<div class="card"><b>'+safe(p.name)+'</b><p class="muted">'+safe(p.caption)+'</p></div>').join('')||'<p class="muted">No results found.</p>';
+}
+load();
 </script>
 </body>
 </html>
